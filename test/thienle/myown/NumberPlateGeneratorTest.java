@@ -16,7 +16,7 @@ public class NumberPlateGeneratorTest {
 
         String plate;
 
-        while (numberOfPlate < 9) {
+        while (numberOfPlate < 999999) {
             plate = NumberPlateGenerator.generateNumberPlate();
             System.out.printf("[%d] %s%n", numberOfPlate, plate);
 
