@@ -1,16 +1,43 @@
 package thienle.myown;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-class NumberPlateGeneratorTest {
+import java.util.HashSet;
+
+@RunWith(JUnit4.class)
+public class NumberPlateGeneratorTest {
+
     @Test
-    void generateNumberPlate() {
+    public void generateNumberPlate() {
         Long numberOfPlate = 0L;
+        HashSet<String> plateSet = new HashSet<>();
 
-        while (numberOfPlate < 999999999) {
-            System.out.println(NumberPlateGenerator.generateNumberPlate());
-            numberOfPlate++;
+        String plate;
+
+        while (numberOfPlate < 999999) {
+            plate = NumberPlateGenerator.generateNumberPlate();
+            System.out.printf("[%d] %s%n", numberOfPlate, plate);
+
+            if (!plateSet.add(plate)) {
+                //  try again
+                System.out.printf("Found duplication for %s. Try again.%n", plate);
+                plate = NumberPlateGenerator.generateNumberPlate();
+                System.out.printf("[%d] New plate: %s%n", numberOfPlate, plate);
+
+                if (!plateSet.add(plate)) {
+                    break;
+                } else {
+                    numberOfPlate++;
+                }
+            } else {
+                numberOfPlate++;
+            }
+
+            System.out.println("------------DUPLICATION DETECTED----------");
+            System.out.printf("Number of plate before duplication: %d%n", numberOfPlate);
+            System.out.printf("The duplication plate is: %s%n", plate);
         }
     }
-
 }
