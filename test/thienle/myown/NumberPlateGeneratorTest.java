@@ -16,7 +16,7 @@ public class NumberPlateGeneratorTest {
 
         String plate;
 
-        while (numberOfPlate < 999999) {
+        while (numberOfPlate < 9) {
             plate = NumberPlateGenerator.generateNumberPlate();
             System.out.printf("[%d] %s%n", numberOfPlate, plate);
 
@@ -27,6 +27,9 @@ public class NumberPlateGeneratorTest {
                 System.out.printf("[%d] New plate: %s%n", numberOfPlate, plate);
 
                 if (!plateSet.add(plate)) {
+                    System.out.println("------------DUPLICATION DETECTED----------");
+                    System.out.printf("Number of plate before duplication: %d%n", numberOfPlate);
+                    System.out.printf("The duplication plate is: %s%n", plate);
                     break;
                 } else {
                     numberOfPlate++;
@@ -34,10 +37,8 @@ public class NumberPlateGeneratorTest {
             } else {
                 numberOfPlate++;
             }
-
-            System.out.println("------------DUPLICATION DETECTED----------");
-            System.out.printf("Number of plate before duplication: %d%n", numberOfPlate);
-            System.out.printf("The duplication plate is: %s%n", plate);
         }
+
+        System.out.println("FINISH");
     }
 }
